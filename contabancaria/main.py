@@ -1,7 +1,14 @@
 from models.Conta_bancaria import Conta_bancaria
 
-conta = Conta_bancaria("Isabella", 1000, 10000, []) 
+conta1 = Conta_bancaria("Isabella", 1000, 500, []) 
+conta2 = Conta_bancaria("Pessoa2", 100, 400, [])
 
-conta.depositar(100)
-conta.sacar(50)
-conta.transferir()
+conta1.depositar(150)
+conta1.exibirHistorico()
+conta1.sacar(100)
+conta1.exibirHistorico()
+
+
+#transferencia
+Isabella.sacar(50)
+Pessoa2.depositar(50)
