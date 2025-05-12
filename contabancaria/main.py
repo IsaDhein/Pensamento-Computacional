@@ -41,5 +41,21 @@ for Conta_bancaria in novaConta:
         Conta_bancaria.transferencia(valorTrans)
 print("Transferência realizada!")
 
-#historico
-Conta_bancaria.exibirHistorico()
+#exibir histórico
+titularHistorico = input("Quem deseja ver o histórico? ")
+
+for conta in novaConta:
+    if conta.titular == titularHistorico:  
+        conta.exibirHistorico()           
+        break  
+else:
+    print("Conta não encontrada!")
+
+
+#excluir conta
+
+
+
+
+
+
