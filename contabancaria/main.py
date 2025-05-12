@@ -47,15 +47,26 @@ titularHistorico = input("Quem deseja ver o histórico? ")
 for conta in novaConta:
     if conta.titular == titularHistorico:  
         conta.exibirHistorico()           
-        break  
+        
+#excluir conta
+excluirConta = input("Digite o titular da conta que deseja excluir: ")
+
+for conta in novaConta:
+    if conta.titular == excluirConta:
+        if conta.saldo > 0:
+            print(f"A conta de {excluirConta} possui um saldo de R${conta.saldo}.")
+            transferir = input("Para excluir a conta, você deve transferir o saldo restante. Deseja realizar a transferência? Aperte (S/N) para continuar ou cancelar a ação. ")
+            if transferir == "N":
+                break
+        contaReceptora = input("Informe o titular da conta para transferir o saldo restante:")
+        for contaTransferir in novaConta:
+            if contaTransferir.titular == contaReceptora:
+                contaTransferir.depositar(conta.saldo)
+                print(f"R${conta.saldo} transferido para {contaReceptora}!")
+                conta.saldo = 0
+                break
+        novaConta.remove(conta)
+        print(f"Conta de {excluirConta} excluída com sucesso!")
+        break
 else:
     print("Conta não encontrada!")
-
-
-#excluir conta
-
-
-
-
-
-
