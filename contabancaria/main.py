@@ -1,72 +1,88 @@
-from models.Conta_bancaria import Conta_bancaria
+from models.ContaBancaria import ContaBancaria
 
 novaConta = [] #criação de lista
 
-novaConta.append(Conta_bancaria("Gabi", 500, 100, [])) #nova conta 
-novaConta.append(Conta_bancaria("Aurora", 700, 200, [])) #nova conta 
+novaConta.append(ContaBancaria("Gabi", 500, 100, [])) #nova conta 
+novaConta.append(ContaBancaria("Aurora", 700, 200, [])) #nova conta 
+op =""
 
-for Conta_bancaria in novaConta: #mostra o seu saldo ao titular da conta
-    print(f"Titular da conta:", Conta_bancaria.titular, ", Saldo:", Conta_bancaria.saldo)
+while True:
 
-titular = input("Digite o titular da conta que deseja ver o saldo:") 
+    op = input("Digite 1 (saldo), 2(saque), 3(depósito), 4(transferência), 5(exibir histórico), 6(excluir conta) :")
 
-for Conta_bancaria in novaConta: #mostra o saldo da conta do titular informado
-    if Conta_bancaria.titular == titular:
-        print(f"{titular} tem R$ {Conta_bancaria.saldo} em sua conta!")
+    if op == "1":
+    # for cliente in novaConta: #mostra o seu saldo ao titular da conta
+    #     print(f"Titular da conta:", cliente.titular, ", Saldo:", cliente.saldo)
 
-#saque
-titularSaque = input("Informe quem deseja realizar o saque:")
+        titular = input("Digite o titular da conta que deseja ver o saldo:") 
 
-valorSaque = float(input("Digite o valor do saque que você deseja realizar:"))
-for Conta_bancaria in novaConta: 
-    if Conta_bancaria == titularSaque:
-        Conta_bancaria.sacar(valorSaque)
-print("Saque realizado!")
+        for Conta_bancaria in novaConta: #mostra o saldo da conta do titular informado
+            if Conta_bancaria.titular == titular:
+                print(f"{titular} tem R$ {Conta_bancaria.saldo} em sua conta!")
+    
+    elif op == "2":
+        #saque
+        titularSaque = input("Informe quem deseja realizar o saque:")
 
-#depósito
-titularDepósito = input("Informe quem deseja realizar o depósito:")
+        valorSaque = float(input("Digite o valor do saque que você deseja realizar:"))
+        for Conta_bancaria in novaConta: 
+            if Conta_bancaria.titular == titularSaque:
+                Conta_bancaria.sacar(valorSaque)
 
-valorDepósito = float(input("Digite o valor do depósito que você deseja realizar:"))
-for Conta_bancaria in novaConta:
-    if Conta_bancaria == titularDepósito:
-        Conta_bancaria.depositar(valorDepósito)
-print("Depósito realizado!")       
+    elif op == "3":
+        #depósito
+        titularDepósito = input("Informe quem deseja realizar o depósito:")
 
-#transferência
-titularTransferencia = input("Quem deseja realizar a transferência?")
+        valorDepósito = float(input("Digite o valor do depósito que você deseja realizar:"))
+        for Conta_bancaria in novaConta:
+            if Conta_bancaria.titular == titularDepósito:
+                Conta_bancaria.depositar(valorDepósito)
+        print("Depósito realizado!") 
 
-valorTrans = float(input("Qual o valor da transferência?"))
-for Conta_bancaria in novaConta:
-    if Conta_bancaria == titularTransferencia:
-        Conta_bancaria.transferencia(valorTrans)
-print("Transferência realizada!")
+    elif op == "4":
 
-#exibir histórico
-titularHistorico = input("Quem deseja ver o histórico? ")
+        #transferência
+        titularTransferencia = input("Quem deseja realizar a transferência?")
 
-for conta in novaConta:
-    if conta.titular == titularHistorico:  
-        conta.exibirHistorico()           
-        
-#excluir conta
-excluirConta = input("Digite o titular da conta que deseja excluir: ")
+        destinatario = input("Para quem você deseja transferir o valor:")
 
-for conta in novaConta:
-    if conta.titular == excluirConta:
-        if conta.saldo > 0:
-            print(f"A conta de {excluirConta} possui um saldo de R${conta.saldo}.")
-            transferir = input("Para excluir a conta, você deve transferir o saldo restante. Deseja realizar a transferência? Aperte (S/N) para continuar ou cancelar a ação. ")
-            if transferir == "N":
+        valorTrans = float(input("Qual o valor da transferência?"))
+        for Conta_bancaria in novaConta:
+            if Conta_bancaria.titular == titularTransferencia:
+                for contaDestinatario in novaConta:
+                    if contaDestinatario == destinatario:
+                        Conta_bancaria.transferencia(contaDestinatario, valorTrans)
+        print("Transferência realizada!")
+
+    elif op == "5":
+
+        #exibir histórico
+        titularHistorico = input("Quem deseja ver o histórico? ")
+
+        for conta in novaConta:
+            if conta.titular == titularHistorico:  
+                conta.exibirHistorico()           
+            
+    elif op == "6":
+        #excluir conta
+        excluirConta = input("Digite o titular da conta que deseja excluir: ")
+
+        for conta in novaConta:
+            if conta.titular == excluirConta:
+                if conta.saldo > 0:
+                    print(f"A conta de {excluirConta} possui um saldo de R${conta.saldo}.")
+                    transferir = input("Para excluir a conta, você deve transferir o saldo restante. Deseja realizar a transferência? Aperte (S/N) para continuar ou cancelar a ação. ")
+                    if transferir == "N":
+                        break
+                contaReceptora = input("Informe o titular da conta para transferir o saldo restante:")
+                for contaTransferir in novaConta:
+                    if contaTransferir.titular == contaReceptora:
+                        contaTransferir.depositar(conta.saldo)
+                        print(f"R${conta.saldo} transferido para {contaReceptora}!")
+                        conta.saldo = 0
+                        break
+                novaConta.remove(conta)
+                print(f"Conta de {excluirConta} excluída com sucesso!")
                 break
-        contaReceptora = input("Informe o titular da conta para transferir o saldo restante:")
-        for contaTransferir in novaConta:
-            if contaTransferir.titular == contaReceptora:
-                contaTransferir.depositar(conta.saldo)
-                print(f"R${conta.saldo} transferido para {contaReceptora}!")
-                conta.saldo = 0
-                break
-        novaConta.remove(conta)
-        print(f"Conta de {excluirConta} excluída com sucesso!")
-        break
-else:
-    print("Conta não encontrada!")
+        else:
+            print("Conta não encontrada!")

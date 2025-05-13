@@ -1,6 +1,6 @@
 import time
 
-class Conta_bancaria:
+class ContaBancaria:
     '''
     Classe que implementa métodos para manipular uma conta bancária.add().
     Atributos: titual (str), saldo (float), limite (float) e históricos (lista de dicionários).
@@ -53,12 +53,12 @@ class Conta_bancaria:
                                    "saldo": self.saldo,
                                    "dataetempo": int(time.time())})
             print("Saque realizado!")
-        else: #sem grana em conta
+        else: #sem dinheiro em conta
             a = input(f"Deseja utilizar o Limite? (R${self.limite}) (s para sim)")
             if a == 's':
                 if (self.saldo + self.limite) >= valor:
                     self.saldo -= valor
-                    print("Saque realizado!")
+                    print("Saque realizado do limite!")
                     return True
                 else:
                     print("Saldo e limite insuficientes!")    
@@ -70,7 +70,7 @@ class Conta_bancaria:
         print("Histórico de Transações:")
         for transacao in self.historico:
             dt = time.localtime(transacao["dataetempo"])
-            print("Op:", transacao["operacao"], #print pra aparecer na tela
+            print("Op:", transacao["operacao"], #print pra aparecer a lista na tela
                   ". Remetente:",  transacao["remetente"], 
                   ". Destinatário", transacao["destinatario"],
                   ". Saldo:", transacao["saldo"],
