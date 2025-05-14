@@ -18,7 +18,7 @@ class CarrosCombustao(Veiculos):
         self.__nCilindrada = nCilindrada
         self.__nCambio = nCambio
 
-    def __str__ -> str:
+    def __str__(self)-> str:
         infos = super().__str__()
         infos += f"Combustivel: {self.__combustivel}\n"
         infos += f"Número de portas: {self.__nPortas}\n"
