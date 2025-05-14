@@ -98,21 +98,10 @@ while True:
 
     #PIX
     elif op == "7":
+        remetente = input("Quem vai realizar o PIX?")
 
-        titularPIX = input("Quem deseja realizar o pix?")
-
-        destinatarioPIX = input("Para quem você deseja transferir o PIX:")
-
-        valorPIX = float(input("Qual o valor do PIX?"))
-        if valorPIX > 0:
-            for Conta_bancaria in novaConta:
-                if Conta_bancaria.titular == titularPIX:
-                    for contaDestinatarioPIX in novaConta:
-                        if contaDestinatarioPIX == destinatarioPIX:
-                            Conta_bancaria.pix(contaDestinatarioPIX, valorPIX)
-        else:
-            break
-        print("Transferência realizada!")
+      
+           
 
     elif op == "sair":
         break

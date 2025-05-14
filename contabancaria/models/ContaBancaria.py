@@ -89,5 +89,18 @@ class ContaBancaria:
             # deposita na conta do destinatario
             destinatario.depositar(valor, self.titular)   
 
-    def PIX(self):
-        return self.__titular                         
+    def PIX(self, conta_bancaria, valor):
+        if valor <= 0:
+            print("Valor Inválido!")
+            return False
+        if self.saldo + self.limite < valor:
+            print("Saldo insuficiente!")
+            return False
+        
+
+        self.sacar(valor)
+        conta_destino.depositar(valor)
+        self.historico.append(f"Fez um PIX de R${valor} para {conta_destino.titular}")
+        conta_destino.historico.append(f"Recebeu um PIX de R${valor} de {self.titular}")
+        return True
+                                
