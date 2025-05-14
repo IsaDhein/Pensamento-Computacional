@@ -87,4 +87,7 @@ class ContaBancaria:
         # se o saque ocorrer com sucesso
         if self.sacar(valor, destinatario.titular): #valor = o que quero mudar e destinatario.titular = pra quem quero mandar
             # deposita na conta do destinatario
-            destinatario.depositar(valor, self.titular)                         
+            destinatario.depositar(valor, self.titular)   
+
+    def PIX(self):
+        return self.__titular                         
