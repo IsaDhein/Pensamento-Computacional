@@ -1,8 +1,6 @@
 class Veiculos:
 
-
 #Classe com as principais funcionalidades do sistema de veiculos, como placa
-
 
     def __init__(self, placa: str, modelo: str, marca: str,
                        ano: int, cor: str, valor_fipe: float) -> None:

@@ -28,6 +28,13 @@ class CarroEletrico(Veiculos):
         return infos
     
     def get_nivel_bateria(self):
+        return self.__nivel_bateria
+    
+    def get_tipo_bateria(self):
+        return self.__tipo_bateria
+    
+    def get_autonomia(self):
+        return self.__autonomia
         
         
 

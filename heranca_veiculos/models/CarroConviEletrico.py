@@ -10,7 +10,7 @@ class CarroConviEletrico(CarroCombustao, CarroEletrico):
                         combustivel: str, nPortas: int, nAssentos: int,
                         nCilindrada: int, nCambio: str, nivel_combustivel: int,
                         nivel_bateria: int, tipo_bateria: str, autonomia: int) -> None:
-        super().__init__(self,placa, modelo, marca, ano, cor, valor_fipe, combustivel,
+        CarroCombustao().__init__(self,placa, modelo, marca, ano, cor, valor_fipe, combustivel,
                          nPortas, nAssentos, nCilindrada, nCambio, nivel_combustivel)
         
         #consultor do carro elétrico
