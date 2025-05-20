@@ -1,7 +1,7 @@
 from models.Veiculos import Veiculos
 
 class Frota(Veiculos):
-    frota = []
+ 
     def __init__(self, placa: str, modelo: str , marca: str, 
                  ano: int, cor: str):
 
@@ -17,6 +17,26 @@ class Frota(Veiculos):
         infos += f"Ano: {self.__ano}\n"
         return infos
     
-    def adicionar_veiculos(self):
-        Veiculos.append
-        #fdkjfgndjj
+    
+    def __init__(self):
+        self.__veiculos = []  #lista privada
+
+        #adicionar veiculos
+    def adicionar_veiculo(self, veiculo: Veiculos):
+        self.__veiculos.append(veiculo)
+
+        #listar veiculos
+    def listar_veiculos(self):
+        print("Veículos na Frota:")
+        for v in self.__veiculos:
+            print(f"  - {v}")
+
+        #calcula o consumo total
+    def calcular_consumo_total(self, distancia: float) -> float:
+        total = 0
+        for veiculo in self.__veiculos:
+            total += veiculo.calcular_consumo(distancia)
+        return total
+
+        
+        

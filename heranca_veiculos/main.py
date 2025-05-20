@@ -52,6 +52,21 @@ yamaha.calcular_consumo(distancia)
 print("Caminhões:")
 volvo.calcular_consumo(distancia)
 
+#exercicio 2:Frota de Veiculos
+frota = Veiculos()
+
+# Adicionando diferentes veículos
+frota.adicionar_veiculo(Carro("Fiat Uno", 0.08))     # 0.08 L/km
+frota.adicionar_veiculo(Moto("Honda CG", 0.04))       # 0.04 L/km
+frota.adicionar_veiculo(Caminhao("Volvo FH", 0.3))    # 0.3 L/km
+
+# Listar todos os veículos
+frota.listar_veiculos()
+
+# Calcular consumo total para uma distância
+distancia = 100  # km
+consumo_total = frota.calcular_consumo_total(distancia)
+print(f"\nConsumo total da frota para {distancia} km: {consumo_total:.2f} litros")
 
 
 
