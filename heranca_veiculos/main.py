@@ -120,5 +120,5 @@ for i in range(len(veiculos)):
 
 #Exibe os veículos duplicados
 print("\nVeículos duplicados encontrados:")
-for v1, v2 in duplicados:
+for v1, v2 in duplicados: #veiculos duplicados
     print(f"Duplicado: {v1} e {v2}")
