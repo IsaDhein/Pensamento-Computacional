@@ -27,6 +27,14 @@ class Veiculos:
         """ Retorna a placa do veiculo"""
         return self.__placa
     
+    def set_placa(self, nova_placa: str) -> None: #altera a placa do veiculo
+        if self.__validar_placa(nova_placa):
+            self.__placa = nova_placa
+        else:
+            print("Placa inválida. Siga o padrão brasileiro(3 letras e 4 números.)")
+
+
+    
     #continuação
 
     def setValorFipe(self, valor) -> None:
@@ -37,3 +45,8 @@ class Veiculos:
         """
         self.__valor_fipe = valor
         return True
+    
+    def __eq__(self, other):
+        if isinstance(other, Veiculos):
+            return self.__placa == other.__placa
+        return False
