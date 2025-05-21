@@ -5,6 +5,7 @@ from models.CarroConviEletrico import CarroConviEletrico
 from models.Carro import Carro
 from models.Moto import Moto
 from models.Caminhao import Caminhao
+from models.Frota import Frota
 #voyage = Veiculos("BCE9D36", "Voyage", "Volkswagen",
 #2018, "Vermelho", 47793)
 
@@ -45,29 +46,40 @@ volvo = Caminhao("JCS3H84", "Truck", "Volvo", 2020, "Branco")
 
 #exercicio 1:Consumo de Combustível
 distancia = float(input("Qual a distância percorrida?"))
-print("Carros:")
 commander.calcular_consumo(distancia)
-print("Motos:")
 yamaha.calcular_consumo(distancia)
-print("Caminhões:")
 volvo.calcular_consumo(distancia)
 
+
 #exercicio 2:Frota de Veiculos
-frota = Veiculos()
+gol = Carro(placa="JDM9D36",
+                           modelo="Jetta GLI",
+                           marca="Volkswagen",
+                           ano=2025,
+                           cor="Vermelho")
+                           
 
-# Adicionando diferentes veículos
-frota.adicionar_veiculo(Carro("Fiat Uno", 0.08))     # 0.08 L/km
-frota.adicionar_veiculo(Moto("Honda CG", 0.04))       # 0.04 L/km
-frota.adicionar_veiculo(Caminhao("Volvo FH", 0.3))    # 0.3 L/km
+cg_125 = Moto(placa="JDM9D36",
+                           modelo="cg_125",
+                           marca="Honda",
+                           ano=2025,
+                           cor="Amarelo")
+                           
 
-# Listar todos os veículos
-frota.listar_veiculos()
+fh = Caminhao(placa="JDM9D36",
+                           modelo="FH",
+                           marca="Volvo",
+                           ano=2025,
+                           cor="Verde")
 
-# Calcular consumo total para uma distância
-distancia = 100  # km
-consumo_total = frota.calcular_consumo_total(distancia)
-print(f"\nConsumo total da frota para {distancia} km: {consumo_total:.2f} litros")
+frota = Frota(gol)
+frota.adicionar_veiculo(cg_125)
+frota.adicionar_veiculo(fh)
 
+print(f"{frota.consumo_total(distancia):.2f} total gasto")
 
+print(f"{gol.calcular_consumo(distancia):.2f} Litros serão gastos a cada 12 km")
+print(f"{cg_125.calcular_consumo(distancia):.2f} Litros serão gastos a cada 20 km")
+print(f"{fh.calcular_consumo(distancia):.2f} Litros serão gastos a cada 5 km")
 
-
+#exercicio 3:Veículo Elétrico e Sobrescrita de Métodos

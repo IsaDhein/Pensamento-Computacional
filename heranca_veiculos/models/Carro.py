@@ -6,21 +6,16 @@ class Carro(Veiculos):
      """
     def __init__(self, placa: str, modelo: str , marca: str, 
                  ano: int, cor: str):
-
         super().__init__(self, placa, modelo, marca, ano, cor)
-    def __str__(self) -> str:
 
-        """Retorna uma string com as informações do veiculo"""
-        infos = f"Placa: {self.__placa}\n"
-        infos += f"Modelo: {self.__modelo}\n"
-        infos += f"Marca: {self.__marca}\n"
-        infos += f"Cor: {self.__cor}\n"
-        infos += f"Ano: {self.__ano}\n"
-        return infos
-   
+
     def calcular_consumo(self, distancia: float) -> float:
-        consumo = distancia/12
-        print("O consumo de combustível é:",consumo)
+
+        if distancia > 0:
+            litro_gasto = distancia/12
+        else:
+            litro_gasto = 0
+        return litro_gasto
 
        
         
