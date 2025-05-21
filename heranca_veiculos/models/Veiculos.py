@@ -31,7 +31,7 @@ class Veiculos:
         if self.__validar_placa(nova_placa):
             self.__placa = nova_placa
         else:
-            print("Placa inválida. Siga o padrão brasileiro(3 letras e 4 números.)")
+            print("Placa inválida. Siga o padrão brasileiro(3 letras e 4 números!)")
 
 
     
