@@ -7,6 +7,7 @@ from models.Moto import Moto
 from models.Caminhao import Caminhao
 from models.Frota import Frota
 from models.VeiculoEletrico import VeiculoEletrico
+from utils.erros import * # * tudo que ta dentro da pasta vai ser importado
 #voyage = Veiculos("BCE9D36", "Voyage", "Volkswagen",
 #2018, "Vermelho", 47793)
 
@@ -111,6 +112,8 @@ veiculos = [
     Caminhao(placa="XYZ5678", modelo="FH", marca="Volvo", ano=2019, cor="Azul", valor_fipe=300000)
 ]
 
+print(fh == byd)
+
 #Identica veiculos duplicados a partir da placa
 duplicados = []
 for i in range(len(veiculos)):
@@ -122,3 +125,37 @@ for i in range(len(veiculos)):
 print("\nVeículos duplicados encontrados:")
 for v1, v2 in duplicados: #veiculos duplicados
     print(f"Duplicado: {v1} e {v2}")
+
+
+#Exercicio 1:Entrada de Dados e Consumo(powerpoint 20/05)
+#toda tratativa de erro, fazer no main
+try: #tratação de erros
+    distancia = float(input("Digite a distancia:"))
+    if distancia < 0:
+        raise DistanciaNegativa("Distância negativa não é permitida!")
+except ValueError as erro:
+    print(f"Erro: {erro}")
+except DistanciaNegativa as erro:
+    print(f"Erro: {erro}")
+
+
+try:
+    placa = input("Informe a placa do seu veículo:")#verifica se a placa é válida
+    if placa[:3].isalpha() and placa[3:4].isnumeric() and placa[4:5].isalpha() and placa[5:].isnumeric(): #5: conferi ate o fim
+        raise PlacaInvalida("Placa inválida! Siga o padrão brasileiro Mercosul(LLLNLNN)")
+except PlacaInvalida as erro:
+    print(f"Erro: {erro}")
+
+
+try: 
+    for Veiculo in Frota
+        if not Veiculo:
+            raise ListaVazia("Nenhum veículo na lista!")
+        consumo = Veiculo.calcular_consumo(distancia)
+        print(f"Veículo {Veiculo.get_placa}")
+
+
+
+
+
+    

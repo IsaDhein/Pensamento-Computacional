@@ -46,7 +46,10 @@ class Veiculos:
         self.__valor_fipe = valor
         return True
     
-    def __eq__(self, other):
-        if isinstance(other, Veiculos):
-            return self.__placa == other.__placa
-        return False
+    def __eq__(self, other): #other: compara veiculos
+        if self.__placa == other.getPlaca():
+            print("Mesmo Veículo!")
+            return True
+        else:
+            print("Não é o mesmo veículo!")
+            return False
