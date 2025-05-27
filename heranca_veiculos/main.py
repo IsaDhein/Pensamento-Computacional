@@ -148,11 +148,18 @@ except PlacaInvalida as erro:
 
 
 try: 
-    for Veiculo in Frota
+    for Veiculo in Frota:
         if not Veiculo:
             raise ListaVazia("Nenhum veículo na lista!")
         consumo = Veiculo.calcular_consumo(distancia)
-        print(f"Veículo {Veiculo.get_placa}")
+        print(f"Veículo {Veiculo.get_placa}), Consumo: {consumo:.2f} litros")
+except ValueError as erro:
+    print(f"Erro: {erro}")
+except DistanciaNegativa as erro:
+    print(f"Erro: {erro}")
+except ListaVazia as erro:
+    print(f"Erro: {erro}")
+
 
 
 
