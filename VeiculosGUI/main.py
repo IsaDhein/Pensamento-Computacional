@@ -17,6 +17,9 @@ class SistemaVeiculos:
         
         # Lista para armazenar os veículos cadastrados
         self.veiculos = []
+
+        #Lista para armazenar os proprientários cadastrados
+        self.proprietarios = []
         
         # Configura o container para as telas
         self.container = tk.Frame(root)
@@ -30,6 +33,7 @@ class SistemaVeiculos:
         self.tela_principal = tk.Frame(self.container)
         self.tela_cadastro = tk.Frame(self.container)
         self.tela_listagem = tk.Frame(self.container)
+        self.tela_proprietario = tk.Frame(self.container)
         
         # Posiciona as telas no mesmo local
         for tela in (self.tela_principal, self.tela_cadastro, self.tela_listagem):
@@ -39,7 +43,8 @@ class SistemaVeiculos:
         self.configurar_tela_principal()
         self.configurar_tela_cadastro()
         self.configurar_tela_listagem()
-        
+        self.configurar_tela_proprietario()
+
         # Mostrar a tela principal
         self.mostrar_tela(self.tela_principal)
     
@@ -56,8 +61,13 @@ class SistemaVeiculos:
         titulo.pack(pady=(0, 30))
         
         # Botões
+        btn_proprietario = tk.Button(frame, text="Cadastrar Proprietário", width=25, height=2,
+                                    command=lambda: self.mostrar_tela(self.tela_cadastro))
+        
+        btn_proprietario.pack(pady=10)
+    
         btn_cadastrar = tk.Button(frame, text="Cadastrar Novo Veículo", width=25, height=2,
-                                 command=lambda: self.mostrar_tela(self.tela_cadastro))
+                                 command=lambda: self.mostrar_tela(self.tela_proprietario))
         btn_cadastrar.pack(pady=10)
         
         btn_listar = tk.Button(frame, text="Listar Veículos", width=25, height=2,
@@ -72,6 +82,7 @@ class SistemaVeiculos:
         # Título
         titulo = tk.Label(self.tela_cadastro, text="CADASTRO DE VEÍCULO", font=("Arial", 16, "bold"))
         titulo.pack(pady=20)
+        
         
         # Frame para o formulário
         form_frame = tk.Frame(self.tela_cadastro, padx=20)
@@ -142,6 +153,81 @@ class SistemaVeiculos:
         
         tk.Button(botoes_frame, text="Salvar", width=10,
                 command=self.salvar_veiculo).pack(side="left", padx=10)
+        
+        def configurar_tela_proprietario(self):
+            # Título
+            titulo = tk.Label(self.tela_cadastro, text="CADASTRO DE VEÍCULO", font=("Arial", 16, "bold"))
+            titulo.pack(pady=20)
+            
+            # Frame para o formulário
+            form_frame = tk.Frame(self.tela_cadastro, padx=20)
+            form_frame.pack(fill="both")
+            
+            # Campos comuns
+            tk.Label(form_frame, text="Placa:").grid(row=0, column=0, sticky="e", pady=5)
+            self.placa_entry = tk.Entry(form_frame, width=15)
+            self.placa_entry.grid(row=0, column=1, sticky="w", pady=5)
+            
+            tk.Label(form_frame, text="Marca:").grid(row=1, column=0, sticky="e", pady=5)
+            self.marca_entry = tk.Entry(form_frame, width=20)
+            self.marca_entry.grid(row=1, column=1, sticky="w", pady=5)
+            
+            tk.Label(form_frame, text="Modelo:").grid(row=2, column=0, sticky="e", pady=5)
+            self.modelo_entry = tk.Entry(form_frame, width=20)
+            self.modelo_entry.grid(row=2, column=1, sticky="w", pady=5)
+            
+            tk.Label(form_frame, text="Ano:").grid(row=3, column=0, sticky="e", pady=5)
+            self.ano_entry = tk.Entry(form_frame, width=6)
+            self.ano_entry.grid(row=3, column=1, sticky="w", pady=5)
+            
+            # Seletor de tipo de veículo
+            tk.Label(form_frame, text="Tipo:").grid(row=4, column=0, sticky="e", pady=5)
+            self.tipo_var = tk.StringVar(value="Carro")
+            
+            tipo_frame = tk.Frame(form_frame)
+            tipo_frame.grid(row=4, column=1, sticky="w", pady=5)
+            
+            tk.Radiobutton(tipo_frame, text="Carro", variable=self.tipo_var, value="Carro",
+                        command=self.mostrar_campos_especificos).pack(side="left")
+            tk.Radiobutton(tipo_frame, text="Moto", variable=self.tipo_var, value="Moto",
+                        command=self.mostrar_campos_especificos).pack(side="left")
+            tk.Radiobutton(tipo_frame, text="Caminhão", variable=self.tipo_var, value="Caminhao",
+                        command=self.mostrar_campos_especificos).pack(side="left")
+            
+            # Frame para campos específicos
+            self.campos_especificos_frame = tk.Frame(form_frame)
+            self.campos_especificos_frame.grid(row=5, column=0, columnspan=2, pady=10)
+            
+            # Campos específicos para Carro
+            self.frame_carro = tk.Frame(self.campos_especificos_frame)
+            tk.Label(self.frame_carro, text="Número de Portas:").pack(side="left")
+            self.portas_entry = tk.Entry(self.frame_carro, width=5)
+            self.portas_entry.pack(side="left", padx=5)
+            
+            # Campos específicos para Moto
+            self.frame_moto = tk.Frame(self.campos_especificos_frame)
+            tk.Label(self.frame_moto, text="Cilindrada (cc):").pack(side="left")
+            self.cilindrada_entry = tk.Entry(self.frame_moto, width=7)
+            self.cilindrada_entry.pack(side="left", padx=5)
+            
+            # Campos específicos para Caminhão
+            self.frame_caminhao = tk.Frame(self.campos_especificos_frame)
+            tk.Label(self.frame_caminhao, text="Capacidade de Carga (kg):").pack(side="left")
+            self.capacidade_entry = tk.Entry(self.frame_caminhao, width=10)
+            self.capacidade_entry.pack(side="left", padx=5)
+            
+            # Mostrar os campos iniciais (Carro)
+            self.mostrar_campos_especificos()
+            
+            # Botões de ação
+            botoes_frame = tk.Frame(self.tela_cadastro)
+            botoes_frame.pack(pady=20)
+            
+            tk.Button(botoes_frame, text="Cancelar", width=10,
+                    command=lambda: self.mostrar_tela(self.tela_principal)).pack(side="left", padx=10)
+            
+            tk.Button(botoes_frame, text="Salvar", width=10,
+                    command=self.salvar_veiculo).pack(side="left", padx=10)
     
     def mostrar_campos_especificos(self):
         # Esconder todos os frames de campos específicos
