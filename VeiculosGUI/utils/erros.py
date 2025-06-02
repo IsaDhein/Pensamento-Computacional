@@ -7,3 +7,9 @@ class DistanciaExcedida(Exception):
     do que a prevista
     """
     pass
+
+class CPFInvalidoError(Exception):
+    pass
+
+class PlacaInvalidaError(Exception):
+    pass
